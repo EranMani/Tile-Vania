@@ -1,3 +1,9 @@
+15/05/21
+- Master branch
+* Added player control in script - moving, jumping and climbing on ladders
+* Added ladder tile map as climbable objects
+* Adjusted rule tile rules to work better in different situations 
+
 14/05/21
 - Master branch
 * Added sprites to use
