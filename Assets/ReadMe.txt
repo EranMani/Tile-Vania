@@ -1,5 +1,11 @@
 15/05/21
 - Master branch
+* Added cinemachine package
+* Added three virtual cameras for the player states - idle, run and climb
+* Created a state driven camera to config the transitions between virtual cameras according to player states
+
+15/05/21
+- Master branch
 * Added player control in script - moving, jumping and climbing on ladders
 * Added ladder tile map as climbable objects
 * Adjusted rule tile rules to work better in different situations 
