@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpVelocity;
     [Range(0.01f, 0.9f)]
     [SerializeField] float playerToGroundRayExtra;
+    [SerializeField] Vector2 deathKick = new Vector2(25f, 25f);
 
     private float normalGravity;
 
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     CapsuleCollider2D collider;
+    GameSession gameSession;
    
     void Start()
     {
@@ -37,10 +39,13 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         collider = GetComponent<CapsuleCollider2D>();
         normalGravity = rb.gravityScale;
+        gameSession = FindObjectOfType<GameSession>();
     }
 
     void Update()
     {
+        if (!isAlive) { return; }
+
         UpdatePlayerMovement();
 
         if (IsPlayerMoving())
@@ -68,7 +73,8 @@ public class Player : MonoBehaviour
         }
 
         Jump();
-        UpdateAnimations();          
+        UpdateAnimations();
+        Die();
     }
 
     private void UpdatePlayerMovement()
@@ -113,6 +119,17 @@ public class Player : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }    
+    }
+
+    private void Die()
+    {
+        if (collider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
+        {
+            anim.SetTrigger("Die");
+            rb.velocity = deathKick;
+            isAlive = false;
+            gameSession.ProcessPlayerDeath();
+        }
     }
 
     private bool IsGrounded()

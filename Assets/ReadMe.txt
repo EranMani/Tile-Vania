@@ -1,3 +1,11 @@
+24/05/21
+- Master branch
+* Basic workflow is done
+* Added a scene loader and game session to control scene loading and player resources such as life and score
+* Added new scenes such as main menu and another level (which is a duplicated version of level1)
+* Added coin gameobject 
+* Added single enemy and hazards such as spikes that can hurt the player
+
 15/05/21
 - Master branch
 * Added cinemachine package
